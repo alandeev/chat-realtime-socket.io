@@ -72,9 +72,10 @@
       <script>
         document.getElementsByTagName('form')[0].addEventListener('submit', event => {
           event.preventDefault();
-          const content = document.getElementById("content").value;
-          document.getElementById("content").value = "";
-          enviarMessagem(content);
+          const content = document.getElementById("content")
+          enviarMessagem(content.value);
+          
+          content.value = "";
         })
       </script>
     </body>

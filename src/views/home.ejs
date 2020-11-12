@@ -5,10 +5,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
 </head>
+<script>
+</script>
 <body>
-  <h1>PAGINA NORMAL</h1>
+  <h1>Todas as Salas Abaixo!</h1>
   <form action="/join">
-    <input type="submit" value="ENTRAR EM UMA SALA">
+    <input type="submit" value="Criar uma Sala">
+
+    <div class="rooms">
+      <% rooms.forEach((room, index) => { %>
+        <div class="room">
+          <p>Usuarios conectados: <%= room.users.length %></p>
+          <a href="/room/<%= room.room_id %>">Sala <%= index+1 %></a>
+        </div>
+      <% }); %>
+    </div>
   </form>
 </body>
 </html>

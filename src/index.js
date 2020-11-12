@@ -17,7 +17,7 @@ app.set('views', __dirname+'/views');
 app.use('/', express.static(__dirname+'/public'));
 
 app.get('/', (req, res) => {
-  return res.render('home');
+  return res.render('home', { rooms });
 })
 
 app.get('/join', (req, res) => {
@@ -55,7 +55,12 @@ io.on('connection', socket => {
 
     rooms[roomIndex].users.splice(userIndex, 1);
 
-    return socket.to(rooms[roomIndex].room_id).broadcast.emit('user-exit', user);
+    socket.to(rooms[roomIndex].room_id).broadcast.emit('user-exit', user);
+
+    if(rooms[roomIndex].users.length == 0)
+      rooms.splice(roomIndex, 1);
+    
+    return;
   });
 
 
