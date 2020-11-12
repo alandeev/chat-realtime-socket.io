@@ -1,0 +1,17 @@
+{
+  "name": "video-project",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "dev": "nodemon ./src"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "ejs": "^3.1.5",
+    "express": "^4.17.1",
+    "peer": "^0.5.3",
+    "socket.io": "^3.0.1",
+    "uuid": "^8.3.1"
+  }
+}

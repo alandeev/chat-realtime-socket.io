@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="estilo.css">
+    <script src="script.js"></script>
+    <title>Document</title>
+    <style>
+      #header{
+    width: 100%;
+    height: 60px;
+    background-color:#333;
+    box-shadow: 0px 4px 2px #333;
+  }
+  body{
+    font-family: arial; 
+    margin: 0; 
+    background-color:#f2f2f2; 
+  }
+  h1{
+    padding: 12px; 
+    width: 1024px;
+    margin: 0px auto; 
+    color: white; 
+  }
+  #container{
+    width: 1024px;
+    min-height: 300px;
+    margin: 0px auto;
+    background-color: white;
+    border: 1px solid #333;
+    margin-top: 20px; 
+  }
+  #controls{
+    width: 1024px;
+    min-height: 100px;
+    margin: 0px auto;
+  }
+  #content{
+    height: 35px;
+    resize: none;
+    width: 960px;
+  }
+  #send{
+    font-size: 24px; 
+    position: absolute; 
+  }
+
+  #message{
+    width: 100%;
+    margin: 5px;
+    height: 15px;
+  }
+  </style>
+  <script>
+    const room_id = "<%= room_id %>";
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.0.1/socket.io.js" defer></script>
+  <script src="/script.js" defer></script>
+</head>
+<body>
+    <div id="header">
+        <div>
+      </div>
+      </div>
+      <div id="container">
+      </div>
+      <form id="controls">
+        <input id ="content" placeholder="mensagem"></input>
+        <input type="submit" id="send" value="enviar"></input>
+      </form>
+      <script>
+        document.getElementsByTagName('form')[0].addEventListener('submit', event => {
+          event.preventDefault();
+          const content = document.getElementById("content").value;
+              
+          enviarMessagem(content);
+        })
+      </script>
+    </body>
+</html>
