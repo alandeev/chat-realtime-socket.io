@@ -15,7 +15,7 @@
       <h1>Hopevel Chat</h1>
       <div class="input">
         <input id="username" type="text" placeholder="Usuario">
-        <button onclick="javascript:createRoom()">Nova Sala</button>
+        <button onclick="javascript:createRoom()">Criar Sala</button>
       </div>
     </div>
     <div class="body">
@@ -31,25 +31,15 @@
         <% }); %>
       </div>
       <div class="users">
-        <p>Pedro</p>
-        <p>Carlos</p>
-        <p>Antonio</p>
+        <% users.forEach((user) => { %>
+          <div>
+            <p><%= user.username %></p>
+            <p>sala: <%= user.roomIndex+1 %></p>
+          </div>
+        <% }); %>
       </div>
     </div>
   </div>
-  <!-- <h1>Todas as Salas Abaixo!</h1>
-  <form action="/join">
-    <input type="submit" value="Criar uma Sala">
-
-    <div class="rooms">
-      <% rooms.forEach((room, index) => { %>
-        <div class="room">
-          <p>Usuarios conectados: <%= room.users.length %></p>
-          <a href="/room/<%= room.room_id %>">Sala <%= index+1 %></a>
-        </div>
-      <% }); %>
-    </div>
-  </form> -->
   <script>
     function joinRoom(room_id){
       const username = document.getElementById("username").value;

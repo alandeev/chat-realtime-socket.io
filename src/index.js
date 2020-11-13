@@ -7,7 +7,8 @@ const app = express();
 const server = require('http').Server(app);
 const io = require('socket.io')(server);
 
-const rooms = []
+const rooms = [];
+const users = [];
 
 app.use(cors());
 
@@ -17,7 +18,7 @@ app.set('views', __dirname+'/views');
 app.use('/', express.static(__dirname+'/public'));
 
 app.get('/', (req, res) => {
-  return res.render('home', { rooms });
+  return res.render('home', { rooms, users });
 })
 
 app.get('/join/:username', (req, res) => {
@@ -43,7 +44,15 @@ app.get('/room/:room_id/:username', (req, res) => {
 
     rooms.push(newRoom);
   }
-  return res.render('room', { room_id, username });
+
+  const roomIndex = rooms.findIndex(room => room.room_id == room_id);
+
+  if(!username.includes('.')){    
+    const exists = users.find(user => user.username == username);
+    if(!exists) users.push({ username, roomIndex });
+  }
+
+  return res.render('room', { room_id, username, roomIndex });
 })
 
 io.on('connection', socket => {
@@ -64,7 +73,10 @@ io.on('connection', socket => {
 
     if(rooms[roomIndex].users.length == 0)
       rooms.splice(roomIndex, 1);
-    
+
+    const userIndexInUsers = users.findIndex(user_ => user_.username == user.username);
+    if(userIndexInUsers >= 0) users.splice(userIndexInUsers, 1);
+
     return;
   });
 

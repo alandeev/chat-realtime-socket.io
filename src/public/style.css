@@ -35,11 +35,8 @@ body{
 }
 
 .input input{
+  width: 70%;
   text-align: center;
-}
-
-.input button{
-  
 }
 
 .body{
@@ -48,7 +45,6 @@ body{
   width: 100%;
   justify-content: space-between;
   background: #fff;
-  /* background-image: linear-gradient(to top, #a18cd1 0%, #fbc2eb 100%); */
 }
 
 .rooms{
@@ -77,15 +73,18 @@ body{
 }
 
 .users{
+  padding: 5px;
   display: flex;
   flex-direction: column;
   width: 20%;
 }
 
-.users p{
+.users div{
   margin: 2px 0;
   padding: 5px;
-  background: #a18cd1;
-  text-align: center;
-  color: aquamarine;
+  background: #f3f3f3;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  color: #07D962;
 }
