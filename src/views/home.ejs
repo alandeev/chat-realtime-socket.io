@@ -3,20 +3,29 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <link rel="stylesheet" href="style.css">
+  <title>Chat</title>
 </head>
 <script>
 </script>
 <body>
-  <h1>Todas as Salas Abaixo!</h1>
-  <form action="/join">
-    <input type="submit" value="Criar uma Sala">
+  <header class="header">
+    <img class="logo" src="logo.svg" alt="">
+    <form action="/join">
+    <input class="call-to-action" type="submit" value="Criar sala">
+  </header>  
 
     <div class="rooms">
       <% rooms.forEach((room, index) => { %>
         <div class="room">
-          <p>Usuarios conectados: <%= room.users.length %></p>
-          <a href="/room/<%= room.room_id %>">Sala <%= index+1 %></a>
+          <div class="room-content">
+            <h2>Sala <%= index+1 %></h2>
+            <p>Usuarios conectados: <%= room.users.length %></p>
+          </div>
+          
+          <div class="room-btn">
+            <a class="btn" href="/room/<%= room.room_id %>">Entrar</a>
+          </div> 
         </div>
       <% }); %>
     </div>
