@@ -3,59 +3,32 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-  <link rel="stylesheet" href="reset.css">
   <link rel="stylesheet" href="style.css">
+  <title>Chat</title>
 </head>
 <script>
 </script>
 <body>
-  <div class="app">
-    <div class="header">
-      <h1>Hopevel Chat</h1>
-      <div class="input">
-        <input id="username" type="text" placeholder="Usuario">
-        <button onclick="javascript:createRoom()">Criar Sala</button>
-      </div>
-    </div>
-    <div class="body">
-      <div class="rooms">
-        <% rooms.forEach((room, index) => { %>
-          <div class="room">
+  <header class="header">
+    <img class="logo" src="logo.svg" alt="">
+    <form action="/join">
+    <input class="call-to-action" type="submit" value="Criar sala">
+  </header>  
+
+    <div class="rooms">
+      <% rooms.forEach((room, index) => { %>
+        <div class="room">
+          <div class="room-content">
             <h2>Sala <%= index+1 %></h2>
-            <div>
-              <p>Usuarios conectados: <%= room.users.length %></p>
-              <button onclick="javascript:joinRoom('<%= room.room_id%>')">ENTRAR</button>
-            </div>
+            <p>Usuarios conectados: <%= room.users.length %></p>
           </div>
-        <% }); %>
-      </div>
-      <div class="users">
-        <% users.forEach((user) => { %>
-          <div>
-            <p><%= user.username %></p>
-            <p>sala: <%= user.roomIndex+1 %></p>
-          </div>
-        <% }); %>
-      </div>
+          
+          <div class="room-btn">
+            <a class="btn" href="/room/<%= room.room_id %>">Entrar</a>
+          </div> 
+        </div>
+      <% }); %>
     </div>
-  </div>
-  <script>
-    function joinRoom(room_id){
-      const username = document.getElementById("username").value;
-
-      if(!username) return alert("Você precisa por um usuario");
-
-      window.location.replace(`/room/${room_id}/${username}`);
-    }
-
-    function createRoom(){
-      const username = document.getElementById("username").value;
-
-      if(!username) return alert("Você precisa por um usuario");
-
-      window.location.replace(`/join/${username}`);
-    }
-  </script>
+  </form>
 </body>
 </html>

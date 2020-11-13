@@ -7,8 +7,7 @@ const app = express();
 const server = require('http').Server(app);
 const io = require('socket.io')(server);
 
-const rooms = [];
-const users = [];
+const rooms = []
 
 app.use(cors());
 
@@ -16,24 +15,20 @@ app.set('view engine', 'ejs');
 app.set('views', __dirname+'/views');
 
 app.use('/', express.static(__dirname+'/public'));
+app.use('/', express.static(__dirname+'/img'));
 
 app.get('/', (req, res) => {
-  return res.render('home', { rooms, users });
+  return res.render('home', { rooms });
 })
 
-app.get('/join/:username', (req, res) => {
-  const { username } = req.params;
-  if(!username)
-    return res.redirect('/');
-
-  return res.redirect(`/room/${uuidV4()}/${username}`);
+app.get('/join', (req, res) => {
+  return res.redirect(`/room/${uuidV4()}`);
 })
 
-app.get('/room/:room_id/:username', (req, res) => {
-  const { room_id, username } = req.params;
+app.get('/room/:room_id', (req, res) => {
+  const { room_id } = req.params;
+  
   if(!validate(room_id)) return res.json({ error: "NOT IS VALID ROOM_ID" })
-  if(!username)
-    return res.redirect('/');
 
   var existsRoom = rooms.find(room => room.room_id == room_id);
   if(!existsRoom){
@@ -44,15 +39,7 @@ app.get('/room/:room_id/:username', (req, res) => {
 
     rooms.push(newRoom);
   }
-
-  const roomIndex = rooms.findIndex(room => room.room_id == room_id);
-
-  if(!username.includes('.')){    
-    const exists = users.find(user => user.username == username);
-    if(!exists) users.push({ username, roomIndex });
-  }
-
-  return res.render('room', { room_id, username, roomIndex });
+  return res.render('room', { room_id });
 })
 
 io.on('connection', socket => {
@@ -73,10 +60,7 @@ io.on('connection', socket => {
 
     if(rooms[roomIndex].users.length == 0)
       rooms.splice(roomIndex, 1);
-
-    const userIndexInUsers = users.findIndex(user_ => user_.username == user.username);
-    if(userIndexInUsers >= 0) users.splice(userIndexInUsers, 1);
-
+    
     return;
   });
 
