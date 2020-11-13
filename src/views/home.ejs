@@ -4,11 +4,40 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <link rel="stylesheet" href="reset.css">
+  <link rel="stylesheet" href="style.css">
 </head>
 <script>
 </script>
 <body>
-  <h1>Todas as Salas Abaixo!</h1>
+  <div class="app">
+    <div class="header">
+      <h1>Hopevel Chat</h1>
+      <div class="input">
+        <input id="username" type="text" placeholder="Usuario">
+        <button onclick="javascript:createRoom()">Nova Sala</button>
+      </div>
+    </div>
+    <div class="body">
+      <div class="rooms">
+        <% rooms.forEach((room, index) => { %>
+          <div class="room">
+            <h2>Sala <%= index+1 %></h2>
+            <div>
+              <p>Usuarios conectados: <%= room.users.length %></p>
+              <button onclick="javascript:joinRoom('<%= room.room_id%>')">ENTRAR</button>
+            </div>
+          </div>
+        <% }); %>
+      </div>
+      <div class="users">
+        <p>Pedro</p>
+        <p>Carlos</p>
+        <p>Antonio</p>
+      </div>
+    </div>
+  </div>
+  <!-- <h1>Todas as Salas Abaixo!</h1>
   <form action="/join">
     <input type="submit" value="Criar uma Sala">
 
@@ -20,6 +49,23 @@
         </div>
       <% }); %>
     </div>
-  </form>
+  </form> -->
+  <script>
+    function joinRoom(room_id){
+      const username = document.getElementById("username").value;
+
+      if(!username) return alert("Você precisa por um usuario");
+
+      window.location.replace(`/room/${room_id}/${username}`);
+    }
+
+    function createRoom(){
+      const username = document.getElementById("username").value;
+
+      if(!username) return alert("Você precisa por um usuario");
+
+      window.location.replace(`/join/${username}`);
+    }
+  </script>
 </body>
 </html>

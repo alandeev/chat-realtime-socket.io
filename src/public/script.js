@@ -1,7 +1,5 @@
 const socket = io('/');
 
-const username = window.prompt("Digite seu usuario");
-
 socket.emit('join-room', room_id, username);
 
 socket.on('user-join', user => {

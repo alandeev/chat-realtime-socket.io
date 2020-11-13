@@ -1,0 +1,91 @@
+body{
+  background-image: linear-gradient(to top, #a18cd1 0%, #fbc2eb 100%);
+  display: flex;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
+}
+
+.app{
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 5px auto;
+  padding: 1% 10%;
+}
+
+.app div{
+  margin: 3px;
+}
+
+.header{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+  padding: 5px 0;
+}
+
+.input{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 100%;
+  width: 20%;
+}
+
+.input input{
+  text-align: center;
+}
+
+.input button{
+  
+}
+
+.body{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-between;
+  background: #fff;
+  /* background-image: linear-gradient(to top, #a18cd1 0%, #fbc2eb 100%); */
+}
+
+.rooms{
+  display: flex;
+  min-height: 200px;
+  flex-direction: column;
+  width: 80%;
+  padding: 5px;
+  max-height: 950px;
+  /* background: #fff; */
+}
+
+.room{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin: 5px 0;
+  background: #f3f3f3;
+  padding: 5px;
+}
+.room div{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  /* width: 100px; */
+}
+
+.users{
+  display: flex;
+  flex-direction: column;
+  width: 20%;
+}
+
+.users p{
+  margin: 2px 0;
+  padding: 5px;
+  background: #a18cd1;
+  text-align: center;
+  color: aquamarine;
+}

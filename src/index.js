@@ -20,14 +20,19 @@ app.get('/', (req, res) => {
   return res.render('home', { rooms });
 })
 
-app.get('/join', (req, res) => {
-  return res.redirect(`/room/${uuidV4()}`);
+app.get('/join/:username', (req, res) => {
+  const { username } = req.params;
+  if(!username)
+    return res.redirect('/');
+
+  return res.redirect(`/room/${uuidV4()}/${username}`);
 })
 
-app.get('/room/:room_id', (req, res) => {
-  const { room_id } = req.params;
-  
+app.get('/room/:room_id/:username', (req, res) => {
+  const { room_id, username } = req.params;
   if(!validate(room_id)) return res.json({ error: "NOT IS VALID ROOM_ID" })
+  if(!username)
+    return res.redirect('/');
 
   var existsRoom = rooms.find(room => room.room_id == room_id);
   if(!existsRoom){
@@ -38,7 +43,7 @@ app.get('/room/:room_id', (req, res) => {
 
     rooms.push(newRoom);
   }
-  return res.render('room', { room_id });
+  return res.render('room', { room_id, username });
 })
 
 io.on('connection', socket => {
